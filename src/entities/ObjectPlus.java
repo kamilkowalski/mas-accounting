@@ -31,6 +31,10 @@ public class ObjectPlus implements Serializable {
         classInstances = (Hashtable<Class, Vector<ObjectPlus>>) stream.readObject();
     }
 
+    public static Vector<ObjectPlus> getClassInstancesVector(Class klass) {
+        return classInstances.get(klass);
+    }
+
     public static void printClassInstances(Class klass) throws Exception {
         Vector<ObjectPlus> classInstancesVector = null;
         if(classInstances.containsKey(klass)) {

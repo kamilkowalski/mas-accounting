@@ -1,22 +1,24 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Customer extends ObjectPlus implements Serializable {
     String fullName;
     String shortName;
-    String email;
+    List<String> emails;
     NipCode nip;
     ZipCode zip;
     String city;
     String address;
 
-    public Customer(String fullName, String shortName, String email, NipCode nip, ZipCode zip, String city, String address) {
+    public Customer(String fullName, String shortName, List<String> email, NipCode nip, ZipCode zip, String city, String address) {
         super();
 
         setFullName(fullName);
         setShortName(shortName);
-        setEmail(email);
+        setEmails(email);
         setNip(nip);
         setZip(zip);
         setCity(city);
@@ -24,7 +26,7 @@ public class Customer extends ObjectPlus implements Serializable {
     }
 
     public Customer(String fullName, String shortName, NipCode nip, ZipCode zip, String city, String address) {
-        this(fullName, shortName, null, nip, zip, city, address);
+        this(fullName, shortName, new ArrayList<>(), nip, zip, city, address);
     }
 
     public String getFullName() {
@@ -43,12 +45,16 @@ public class Customer extends ObjectPlus implements Serializable {
         this.shortName = shortName;
     }
 
-    public String getEmail() {
-        return email;
+    public List<String> getEmails() {
+        return emails;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmails(List<String> emails) {
+        this.emails = emails;
+    }
+
+    public void addEmail(String email) {
+        emails.add(email);
     }
 
     public NipCode getNip() {
@@ -85,6 +91,12 @@ public class Customer extends ObjectPlus implements Serializable {
 
     @Override
     public String toString() {
-        return getFullName() + "\n" + getAddress() + "\n" + getZip().getCode() + " " + getCity();
+        String output = getFullName() + "\n" + getAddress() + "\n" + getZip().getCode() + " " + getCity();
+
+        for(String email : getEmails()) {
+            output += "\n" + email;
+        }
+
+        return output;
     }
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 public class Invoice extends ObjectPlus implements Serializable {
 
@@ -93,5 +94,18 @@ public class Invoice extends ObjectPlus implements Serializable {
         sb.append("SUMA: " + getTotalPrice());
 
         return sb.toString();
+    }
+
+    public static double getAverageInvoiceValue() {
+        Vector<ObjectPlus> invoices = ObjectPlus.getClassInstancesVector(Invoice.class);
+        if (invoices.size() == 0) return 0.0;
+
+        double sum = 0;
+        for(ObjectPlus obj : invoices) {
+            Invoice invoice = (Invoice)obj;
+            sum += invoice.getTotalPrice();
+        }
+
+        return sum / invoices.size();
     }
 }
