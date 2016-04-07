@@ -1,10 +1,11 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Invoice {
+public class Invoice extends ObjectPlus implements Serializable {
 
     String number;
     Customer customer;
@@ -13,6 +14,8 @@ public class Invoice {
     Date paymentDate;
 
     public Invoice(String number, Customer customer, Date creationDate, Date paymentDate) {
+        super();
+
         setNumber(number);
         setCustomer(customer);
         setPaymentDate(paymentDate);

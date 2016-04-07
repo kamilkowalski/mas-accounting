@@ -1,5 +1,9 @@
 import entities.*;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,5 +42,32 @@ public class Accounting {
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
+
+        System.out.println("\n---------------------\n");
+
+        try {
+            ObjectPlus.printClassInstances(Customer.class);
+        } catch(Exception e){
+            System.out.println("Wyjątek przy wypisywaniu ekstensji: " + e.toString());
+        }
+
+        System.out.println("\n---------------------\n");
+
+        try {
+            String filePath = "ekstensja.dump";
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath));
+            Customer.saveClassInstances(oos);
+
+            System.out.println("Zapisano ekstensję do pliku " + filePath);
+
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath));
+            Customer.readClassInstances(ois);
+
+            System.out.println("Odczytano ekstensję z pliku " + filePath);
+        } catch (Exception e){
+            System.out.println("Wyjątek przy zapisie i odczycie ekstensji: " + e.toString());
+        }
+
+
     }
 }

@@ -1,8 +1,9 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class VATInvoiceEntry extends InvoiceEntry {
+public class VATInvoiceEntry extends InvoiceEntry implements Serializable {
 
     int rate;
 

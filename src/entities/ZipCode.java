@@ -1,11 +1,15 @@
 package entities;
 
 
-public class ZipCode {
+import java.io.Serializable;
+
+public class ZipCode extends ObjectPlus implements Serializable {
 
     String code;
 
     public ZipCode(String code) {
+        super();
+
         if(!isValid(code)) {
             throw new IllegalArgumentException("Niepoprawny kod pocztowy: " + code);
         }

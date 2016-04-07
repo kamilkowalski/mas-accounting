@@ -1,10 +1,14 @@
 package entities;
 
-public class NipCode {
+import java.io.Serializable;
+
+public class NipCode extends ObjectPlus implements Serializable {
 
     String code;
 
     public NipCode(String code) {
+        super();
+
         if(!isValid(code)) {
             throw new IllegalArgumentException("Niepoprawny NIP: " + code);
         }

@@ -1,6 +1,8 @@
 package entities;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer extends ObjectPlus implements Serializable {
     String fullName;
     String shortName;
     String email;
@@ -10,6 +12,8 @@ public class Customer {
     String address;
 
     public Customer(String fullName, String shortName, String email, NipCode nip, ZipCode zip, String city, String address) {
+        super();
+
         setFullName(fullName);
         setShortName(shortName);
         setEmail(email);

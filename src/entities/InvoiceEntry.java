@@ -1,12 +1,16 @@
 package entities;
 
-public class InvoiceEntry {
+import java.io.Serializable;
+
+public class InvoiceEntry extends ObjectPlus implements Serializable {
 
     String name;
     int quantity;
     double price;
 
     public InvoiceEntry(String name, int quantity, double price) {
+        super();
+
         setName(name);
         setQuantity(quantity);
         setPrice(price);

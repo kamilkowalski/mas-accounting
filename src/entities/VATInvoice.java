@@ -1,11 +1,12 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class VATInvoice extends Invoice {
+public class VATInvoice extends Invoice implements Serializable {
 
     List<VATInvoiceEntry> entries = new ArrayList<VATInvoiceEntry>();
 
