@@ -8,7 +8,7 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 public class ObjectPlus implements Serializable {
-    private static Hashtable<Class, Vector<ObjectPlus>> classInstances = new Hashtable<>();
+    protected static Hashtable<Class, Vector<ObjectPlus>> classInstances = new Hashtable<>();
 
     public ObjectPlus() {
         Vector<ObjectPlus> classInstancesVector = null;

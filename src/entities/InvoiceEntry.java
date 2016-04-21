@@ -5,24 +5,44 @@ import java.util.Vector;
 
 public class InvoiceEntry extends ObjectPlus implements Serializable {
 
-    String name;
     int quantity;
-    double price;
 
-    public InvoiceEntry(String name, int quantity, double price) {
+    private Product product;
+
+    private InvoiceEntry(Product product, int quantity) throws Exception {
         super();
 
-        setName(name);
+        setProduct(product);
         setQuantity(quantity);
-        setPrice(price);
     }
 
-    public String getName() {
-        return name;
+    public static InvoiceEntry createInvoiceEntry(Invoice invoice, Product product, int quantity) throws Exception {
+        if (invoice == null) {
+            throw new Exception("Faktura nie istnieje!");
+        }
+
+        InvoiceEntry entry = new InvoiceEntry(product, quantity);
+        invoice.addInvoiceEntry(entry);
+        return entry;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) throws Exception {
+        if (product == null) {
+            throw new Exception("Produkt musi istnieć!");
+        }
+
+        if (this.product == product) return;
+
+        if (this.product != null) {
+            this.product.removeInvoiceEntry(this);
+        }
+
+        this.product = product;
+        this.product.addInvoiceEntry(this);
     }
 
     public int getQuantity() {
@@ -33,20 +53,16 @@ public class InvoiceEntry extends ObjectPlus implements Serializable {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
+    public double getNetPrice() {
+        return getProduct().getPrice() * getQuantity();
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public double getTotalPrice() {
-        return this.price * this.quantity;
+    public double getGrossPrice() {
+        return getProduct().getGrossPrice() * getQuantity();
     }
 
     @Override
     public String toString() {
-        return getName() + " | " + getQuantity() + "szt. | " + getPrice() + "zł | " + getTotalPrice() + "zł";
+        return "" + getProduct().getName() + " | " + getQuantity() + " | " + getNetPrice() + " | " + getGrossPrice();
     }
 }
